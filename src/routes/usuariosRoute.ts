@@ -1,12 +1,35 @@
 import express, { Request, Response } from 'express'
 
+import { UsuarioDAO } from '../database/UsuarioDAO.js'
+import { Usuario } from '../models/Usuario.js'
+
 export const usuarioRouter = express.Router()
 
 usuarioRouter.get('/', (req: Request, res: Response) => {
   res.send('Página de Usuários').status(200)
 })
 
-usuarioRouter.post('/cadastrar', (req: Request, res: Response) => {
+usuarioRouter.post('/cadastrar', async (req: Request, res: Response) => {
+  const novoUsuario: {
+    nome: string,
+    cpf: string,
+    nascimento: Date,
+    sexo: string,
+    saldo:number
+  } = req.body
+
+  let usuario = Usuario.build({
+    nome: novoUsuario.nome, 
+    cpf: novoUsuario.cpf, 
+    nascimento: novoUsuario.nascimento, 
+    sexo: novoUsuario.sexo, 
+    saldo: novoUsuario.saldo
+  })
+
+  let resultado = await UsuarioDAO.cadastrar(usuario)
+
+  console.log(resultado)
+
   res.send('Cadastrar novo usuário').status(200)
 })
 

@@ -3,7 +3,7 @@ import { db } from "../database/db.js"
 
 let sequelize = db.criarConexao()
 
-class Usuario extends Model {}
+export class Usuario extends Model {}
 
 Usuario.init({
   nome: {
@@ -29,5 +29,7 @@ Usuario.init({
   }
 }, {
   sequelize,
+  freezeTableName: true,
+  timestamps: false,
   modelName: 'usuario'
 })

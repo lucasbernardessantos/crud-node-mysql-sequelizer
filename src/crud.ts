@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express'
 import swaggerUi from 'swagger-ui-express'
 
-import { usuarioRouter } from './routes/usuarios'
+import { usuarioRouter } from './routes/usuariosRoute'
 import swaggerDocs from "./swagger.json"
 
 const app = express()
