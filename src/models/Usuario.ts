@@ -1,4 +1,4 @@
-import { DataTypes, Model } from "sequelize"
+import { DataTypes, Model, BaseError } from "sequelize"
 import { db } from "../database/db.js"
 
 let sequelize = db.criarConexao()
@@ -31,5 +31,5 @@ Usuario.init({
   sequelize,
   freezeTableName: true,
   timestamps: false,
-  modelName: 'usuario'
+  modelName: 'usuarios'
 })

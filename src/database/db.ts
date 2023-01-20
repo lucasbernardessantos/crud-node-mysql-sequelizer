@@ -2,8 +2,8 @@ import { Sequelize } from "sequelize"
 
 export class db {
   static criarConexao(): Sequelize {
-    return new Sequelize('usuarios', 'root', '', {
-      host: 'localhost',
+    return new Sequelize('empresa_a', 'root', 'garf@1234', {
+      host: '127.0.0.1',
       dialect: 'mysql'
     })
   }

@@ -1,1 +1,94 @@
-{}
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "CRUD API",
+    "description": "Essa API simula um CRUD dos usuarios",
+    "contact": {
+      "email": "lucas.bernardes.santos.mail@gmail.com"
+    },
+    "version": 1.0
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "API de teste"
+    },
+    {
+      "url": "http://www.usuarios.com",
+      "description": "API de produção"
+    }
+  ],
+  "paths": {
+    "/usuario/cadastrar": {
+      "post": {
+        "summary": "Cadastrar usuário",
+        "description": "Rota responsável por cadastrar novos usuários",
+        "tags": ["Usuario"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Usuario"
+              },
+              "examples": {
+                "usuario": {
+                  "value": {
+                    "nome": "Liz Adriana dos Santos",
+                    "cpf": "13346563715",
+                    "nascimento": "1996/05/21",
+                    "sexo": "F",
+                    "saldo": 3549.78
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "$ref": "#/components/schemas/Usuario"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Bad Request - Mensagem de Erro"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Usuario": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "nascimento": {
+            "type": "string",
+            "format": "date"
+          },
+          "sexo": {
+            "type": "string",
+            "enum": ["F", "M"]
+          },
+          "saldo": {
+            "type": "number",
+            "format": "float",
+            "example": 1.25
+          }
+        }
+      }
+    }
+  }
+}

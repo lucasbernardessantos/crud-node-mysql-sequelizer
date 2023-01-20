@@ -24,10 +24,11 @@ class UsuarioDAO {
                     sexo: usuario.dataValues.sexo,
                     saldo: usuario.dataValues.saldo
                 });
+                console.log(`Resultado: ${resultado}`);
                 return resultado;
             }
             catch (err) {
-                throw err;
+                return err;
             }
             finally {
                 sequelize.close();

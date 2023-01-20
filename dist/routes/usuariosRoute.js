@@ -30,8 +30,12 @@ exports.usuarioRouter.post('/cadastrar', (req, res) => __awaiter(void 0, void 0,
         saldo: novoUsuario.saldo
     });
     let resultado = yield UsuarioDAO_js_1.UsuarioDAO.cadastrar(usuario);
-    console.log(resultado);
-    res.send('Cadastrar novo usuário').status(200);
+    if (resultado instanceof Usuario_js_1.Usuario) {
+        res.status(201).json(resultado);
+    }
+    else {
+        res.status(400).send(resultado.name);
+    }
 }));
 exports.usuarioRouter.get('/buscar', (req, res) => {
     res.send('Buscar um usuário').status(200);
