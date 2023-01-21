@@ -23,7 +23,7 @@ usuarioRouter.post('/cadastrar', async (req: Request, res: Response) => {
 
   let resultado: Usuario | any = await UsuarioDAO.cadastrar(usuario)
 
-  if(resultado instanceof Usuario){
+  if (resultado instanceof Usuario) {
     res.status(201).json(resultado)
   }
   else {

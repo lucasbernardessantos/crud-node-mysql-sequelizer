@@ -1,6 +1,5 @@
 import { db } from "./db.js"
 import { Usuario } from "../models/Usuario.js"
-import { Error } from "sequelize"
 
 export class UsuarioDAO {
   static async cadastrar(usuario: Usuario): Promise<Usuario | any> {
