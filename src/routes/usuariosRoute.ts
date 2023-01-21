@@ -31,12 +31,28 @@ usuarioRouter.post('/cadastrar', async (req: Request, res: Response) => {
   }
 })
 
-usuarioRouter.get('/buscar', (req: Request, res: Response) => {
-  res.send('Buscar um usuário').status(200)
+usuarioRouter.get('/buscar/:cpf', async (req: Request, res: Response) => {
+  let resultado = await UsuarioDAO.selecionar(req.params.cpf)
+
+  res.status(200).send(resultado)
 })
 
-usuarioRouter.put('/atualizar', (req: Request, res: Response) => {
-  res.send('Atualizar usuário').status(200)
+usuarioRouter.put('/atualizar', async (req: Request, res: Response) => {
+  const usuario: InUsuario = req.body
+
+  let usuarioAtualizado = Usuario.build({
+    nome: usuario.nome,
+    cpf: usuario.cpf,
+    nascimento: usuario.nascimento,
+    sexo: usuario.sexo,
+    saldo: usuario.saldo
+  })
+
+  let linhasModificadas = await UsuarioDAO.alterar(usuarioAtualizado)
+
+  console.log(linhasModificadas)
+
+  res.status(201).json(linhasModificadas)
 })
 
 usuarioRouter.delete('/deletar', (req: Request, res: Response) => {

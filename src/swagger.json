@@ -46,7 +46,7 @@
         },
         "responses": {
           "201": {
-            "description": "Accepted",
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
@@ -58,6 +58,79 @@
           },
           "401": {
             "description": "Bad Request - Mensagem de Erro"
+          }
+        }
+      }
+    },
+    "/usuario/buscar/{cpf}": {
+      "get": {
+        "summary": "Buscar usuário",
+        "description": "Buscar um usuário apartir do cpf enviado",
+        "tags": ["Usuario"],
+        "parameters": [
+          {
+          "in": "path",
+          "name": "cpf",
+          "schema": { 
+            "type": "string",
+            "example": "17022834709"
+          },
+          "required": true,
+          "description": "CPF do usuário, usado para identifica-lo no banco"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "$ref": "#/components/schemas/Usuario"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuario/atualizar": {
+      "put": {
+        "sumarry": "Alterar dados de usuário",
+        "description": "Rota responsável por alterar os dados de um usuário",
+        "tags": ["Usuario"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Usuario"
+              },
+              "examples": {
+                "usuario": {
+                  "value": {
+                    "nome": "Liz Adriana dos Santos",
+                    "cpf": "13346563715",
+                    "nascimento": "1996/05/21",
+                    "sexo": "F",
+                    "saldo": 3549.78
+                  }
+                }
+              }
+            }
+          } 
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "number",
+                  "description": "Quantidade de linhas alteradas",
+                  "example": 1
+                }
+              }
+            }
           }
         }
       }

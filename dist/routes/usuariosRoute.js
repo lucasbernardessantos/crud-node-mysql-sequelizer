@@ -37,12 +37,23 @@ exports.usuarioRouter.post('/cadastrar', (req, res) => __awaiter(void 0, void 0,
         res.status(400).send(resultado.name);
     }
 }));
-exports.usuarioRouter.get('/buscar', (req, res) => {
-    res.send('Buscar um usuário').status(200);
-});
-exports.usuarioRouter.put('/atualizar', (req, res) => {
-    res.send('Atualizar usuário').status(200);
-});
+exports.usuarioRouter.get('/buscar/:cpf', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let resultado = yield UsuarioDAO_js_1.UsuarioDAO.selecionar(req.params.cpf);
+    res.status(200).send(resultado);
+}));
+exports.usuarioRouter.put('/atualizar', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const usuario = req.body;
+    let usuarioAtualizado = Usuario_js_1.Usuario.build({
+        nome: usuario.nome,
+        cpf: usuario.cpf,
+        nascimento: usuario.nascimento,
+        sexo: usuario.sexo,
+        saldo: usuario.saldo
+    });
+    let linhasModificadas = yield UsuarioDAO_js_1.UsuarioDAO.alterar(usuarioAtualizado);
+    console.log(linhasModificadas);
+    res.status(201).json(linhasModificadas);
+}));
 exports.usuarioRouter.delete('/deletar', (req, res) => {
     res.send('Deletar usuário').status(200);
 });
