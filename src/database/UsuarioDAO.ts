@@ -53,4 +53,20 @@ export class UsuarioDAO {
       sequelize.close()
     }
   }
+
+  static async deletar(CPF_Usuario: string): Promise<number | any> {
+    let sequelize = db.criarConexao()
+    try {
+      let linhasModificadas = await Usuario.destroy({
+        where: {
+          cpf: CPF_Usuario
+        }
+      })
+      return linhasModificadas
+    } catch (error) {
+      return error
+    } finally {
+      sequelize.close()
+    }
+  }
 }

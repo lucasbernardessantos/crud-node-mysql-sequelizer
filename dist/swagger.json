@@ -23,7 +23,9 @@
             "post": {
                 "summary": "Cadastrar usuário",
                 "description": "Rota responsável por cadastrar novos usuários",
-                "tags": ["Usuario"],
+                "tags": [
+                    "Usuario"
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -66,7 +68,9 @@
             "get": {
                 "summary": "Buscar usuário",
                 "description": "Buscar um usuário apartir do cpf enviado",
-                "tags": ["Usuario"],
+                "tags": [
+                    "Usuario"
+                ],
                 "parameters": [
                     {
                         "in": "path",
@@ -96,9 +100,11 @@
         },
         "/usuario/atualizar": {
             "put": {
-                "sumarry": "Alterar dados de usuário",
+                "summary": "Atualizar usuário",
                 "description": "Rota responsável por alterar os dados de um usuário",
-                "tags": ["Usuario"],
+                "tags": [
+                    "Usuario"
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -134,6 +140,41 @@
                     }
                 }
             }
+        },
+        "/usuario/deletar/{cpf}": {
+            "delete": {
+                "summary": "Deletar usuário",
+                "description": "Deletar um usuário apartir do cpf enviado",
+                "tags": [
+                    "Usuario"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "cpf",
+                        "schema": {
+                            "type": "string",
+                            "example": "17022834709"
+                        },
+                        "required": true,
+                        "description": "CPF do usuário, usado para identifica-lo no banco"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Deleted",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "number",
+                                    "description": "Quantidade de linhas alteradas",
+                                    "example": 0
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -153,7 +194,10 @@
                     },
                     "sexo": {
                         "type": "string",
-                        "enum": ["F", "M"]
+                        "enum": [
+                            "F",
+                            "M"
+                        ]
                     },
                     "saldo": {
                         "type": "number",

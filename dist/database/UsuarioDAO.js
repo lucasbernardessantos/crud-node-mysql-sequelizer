@@ -73,5 +73,24 @@ class UsuarioDAO {
             }
         });
     }
+    static deletar(CPF_Usuario) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let sequelize = db_js_1.db.criarConexao();
+            try {
+                let linhasModificadas = yield Usuario_js_1.Usuario.destroy({
+                    where: {
+                        cpf: CPF_Usuario
+                    }
+                });
+                return linhasModificadas;
+            }
+            catch (error) {
+                return error;
+            }
+            finally {
+                sequelize.close();
+            }
+        });
+    }
 }
 exports.UsuarioDAO = UsuarioDAO;

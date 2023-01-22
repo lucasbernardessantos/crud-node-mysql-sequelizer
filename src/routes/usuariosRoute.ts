@@ -55,6 +55,8 @@ usuarioRouter.put('/atualizar', async (req: Request, res: Response) => {
   res.status(201).json(linhasModificadas)
 })
 
-usuarioRouter.delete('/deletar', (req: Request, res: Response) => {
-  res.send('Deletar usuário').status(200)
+usuarioRouter.delete('/deletar/:cpf', async (req: Request, res: Response) => {
+  let resultado = await UsuarioDAO.deletar(req.params.cpf)
+  console.log(resultado)
+  res.status(200).json(resultado)
 })

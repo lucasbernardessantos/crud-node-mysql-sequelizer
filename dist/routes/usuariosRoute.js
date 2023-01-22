@@ -54,6 +54,8 @@ exports.usuarioRouter.put('/atualizar', (req, res) => __awaiter(void 0, void 0, 
     console.log(linhasModificadas);
     res.status(201).json(linhasModificadas);
 }));
-exports.usuarioRouter.delete('/deletar', (req, res) => {
-    res.send('Deletar usuário').status(200);
-});
+exports.usuarioRouter.delete('/deletar/:cpf', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let resultado = yield UsuarioDAO_js_1.UsuarioDAO.deletar(req.params.cpf);
+    console.log(resultado);
+    res.status(200).json(resultado);
+}));
